@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illia Modenov - Professional Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .language-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .language-btn:hover:not(.active) {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .resume-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 800px;
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.5);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .contact-item i {
+            width: 20px;
+            margin-right: 15px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.8;
+        }
+
+        .skills-section, .languages-section, .hobbies-section {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .skill-item, .language-item, .hobby-item {
+            margin-bottom: 10px;
+            font-size: 14px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .skill-item::before, .language-item::before, .hobby-item::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+
+        .main-content {
+            padding: 40px 50px;
+        }
+
+        .profile-section {
+            margin-bottom: 40px;
+        }
+
+        .profile-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .profile-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .experience-section, .education-section {
+            margin-bottom: 40px;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .experience-item:last-child, .education-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-header, .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .job-title, .degree-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .company, .institution {
+            font-size: 16px;
+            color: #667eea;
+            margin-top: 5px;
+        }
+
+        .job-date, .education-date {
+            font-size: 14px;
+            color: #777;
+            background: #f8f9fa;
+            padding: 5px 15px;
+            border-radius: 15px;
+            white-space: nowrap;
+        }
+
+        .job-description, .degree-description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .resume-card {
+                grid-template-columns: 1fr;
+                margin-top: 100px;
+            }
+
+            .sidebar {
+                padding: 30px 20px;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .job-header, .education-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .job-date, .education-date {
+                margin-top: 10px;
+            }
+
+            .language-switcher {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        }
+
+        .website-link {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .website-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-switcher">
+            <button class="language-btn active" onclick="switchLanguage('de')">Deutsch</button>
+            <button class="language-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+
+        <div class="resume-card">
+            <div class="sidebar">
+                <div class="profile-photo">
+                    <i class="fas fa-user"></i>
+                </div>
+                
+                <div class="name">Illia Modenov</div>
+                
+                <div class="title" data-de="Bankvermögensverwalter" data-en="Banking Asset Manager">
+                    Bankvermögensverwalter
+                </div>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+49 1523 166 57 02</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:illiamodenov@gmail.com">illiamodenov@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="#" target="_blank">LinkedIn</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Dammstr. 33, Crailsheim</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-birthday-cake"></i>
+                        <span data-de="42 Jahre alt (17.11.1982)" data-en="42 years old (17.11.1982)">42 Jahre alt (17.11.1982)</span>
+                    </div>
+                </div>
+
+                <div class="skills-section">
+                    <div class="section-title" data-de="Schlüssel Fähigkeiten" data-en="Key Skills">Schlüssel Fähigkeiten</div>
+                    <div class="skill-item" data-de="Abläufe erstellen, optimieren und verwalten" data-en="Create, optimize and manage processes">Abläufe erstellen, optimieren und verwalten</div>
+                    <div class="skill-item" data-de="Banken Vermögensanalyse" data-en="Banking asset analysis">Banken Vermögensanalyse</div>
+                    <div class="skill-item" data-de="Portfolioverwaltung von Bankenvermögen" data-en="Banking portfolio management">Portfolioverwaltung von Bankenvermögen</div>
+                    <div class="skill-item" data-de="Umfangreiche Planung und Kontrollen von Vermögenswerten" data-en="Comprehensive asset planning and controls">Umfangreiche Planung und Kontrollen von Vermögenswerten</div>
+                    <div class="skill-item" data-de="Gesetze Projekte entwerfen" data-en="Legal project design">Gesetze Projekte entwerfen</div>
+                </div>
+
+                <div class="languages-section">
+                    <div class="section-title" data-de="Kenntnisse" data-en="Languages">Kenntnisse</div>
+                    <div class="language-item" data-de="UA, RU – Muttersprachen" data-en="UA, RU – Native languages">UA, RU – Muttersprachen</div>
+                    <div class="language-item" data-de="DE - B2" data-en="DE - B2">DE - B2</div>
+                    <div class="language-item" data-de="EN, FR – Mittelstufe – B1" data-en="EN, FR – Intermediate – B1">EN, FR – Mittelstufe – B1</div>
+                    <div class="language-item" data-de="EDV – MS Office" data-en="IT – MS Office">EDV – MS Office</div>
+                    <div class="language-item" data-de="KI – Nutzer" data-en="AI – User">KI – Nutzer</div>
+                </div>
+
+                <div class="hobbies-section">
+                    <div class="section-title" data-de="Hobbies" data-en="Hobbies">Hobbies</div>
+                    <div class="hobby-item" data-de="🏃 Joggen & 🚴‍ Radfahren" data-en="🏃 Jogging & 🚴‍ Cycling">🏃 Joggen & 🚴‍ Radfahren</div>
+                    <div class="hobby-item" data-de="🌍 Familienreisen" data-en="🌍 Family travels">🌍 Familienreisen</div>
+                    <div class="hobby-item" data-de="📖 Bücher lesen" data-en="📖 Reading books">📖 Bücher lesen</div>
+                    <div class="hobby-item">
+                        <a href="https://staerke-der-einheit.de/" target="_blank" class="website-link">staerke-der-einheit.de</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="profile-section">
+                    <h2 class="profile-title" data-de="Profil" data-en="Profile">Profil</h2>
+                    <p class="profile-description" data-de="Berufserfahrener Bankvermögensverwalter mit entsprechenden Abschlüssen in Finanzwesen und Recht und 13 Jahren Erfahrung. Ausgeprägte Fähigkeiten in der Analyse und Verwaltung von Bankvermögen (d. h. strategische Wahl der Ausführung „Verkaufen / Behalten"). Experte in der Restrukturierung von Schlüsselkundenkrediten und in der Etablierung und Kontrolle von Prozessabläufen. Kenntnisse in der Erstellung von Vorschriften. Implementierung digitaler Dienstleistungen." data-en="Experienced banking asset manager with relevant degrees in finance and law and 13 years of experience. Strong skills in banking asset analysis and management (i.e., strategic choice of 'Sell/Hold' execution). Expert in key client credit restructuring and in establishing and controlling process flows. Knowledge in regulation drafting. Implementation of digital services.">
+                        Berufserfahrener Bankvermögensverwalter mit entsprechenden Abschlüssen in Finanzwesen und Recht und 13 Jahren Erfahrung. Ausgeprägte Fähigkeiten in der Analyse und Verwaltung von Bankvermögen (d. h. strategische Wahl der Ausführung „Verkaufen / Behalten"). Experte in der Restrukturierung von Schlüsselkundenkrediten und in der Etablierung und Kontrolle von Prozessabläufen. Kenntnisse in der Erstellung von Vorschriften. Implementierung digitaler Dienstleistungen.
+                    </p>
+                </div>
+
+                <div class="experience-section">
+                    <h2 class="profile-title" data-de="Berufserfahrung" data-en="Professional Experience">Berufserfahrung</h2>
+                    
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title" data-de="Vermögensverwalter" data-en="Asset Manager">Vermögensverwalter</div>
+                                <div class="company" data-de="Staatliche Einlagensicherungsfonds der Ukraine, Kyiw" data-en="State Deposit Guarantee Fund of Ukraine, Kyiv">Staatliche Einlagensicherungsfonds der Ukraine, Kyiw</div>
+                            </div>
+                            <div class="job-date">2017 – 2022</div>
+                        </div>
+                        <div class="job-description" data-de="Management von Vermögenswerten; Kompetenzen in der Erstellung; Genehmigung und Steuerung der Ausführung von Vermögensverwaltungsplänen. Unterstützung des Vermögens Verwaltungsausschusses. Mitglied im Ausschuss für Ausschreibungen (Einkäufe)." data-en="Asset management; Competencies in creation; Approval and control of asset management plan execution. Support of the Asset Management Committee. Member of the Tender Committee (Procurement).">
+                            Management von Vermögenswerten; Kompetenzen in der Erstellung; Genehmigung und Steuerung der Ausführung von Vermögensverwaltungsplänen. Unterstützung des Vermögens Verwaltungsausschusses. Mitglied im Ausschuss für Ausschreibungen (Einkäufe).
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title" data-de="Aufsichtsbeamter" data-en="Supervisory Officer">Aufsichtsbeamter</div>
+                                <div class="company" data-de="Nationalbank der Ukraine, Kyiw" data-en="National Bank of Ukraine, Kyiv">Nationalbank der Ukraine, Kyiw</div>
+                            </div>
+                            <div class="job-date">2016 – 2017</div>
+                        </div>
+                        <div class="job-description" data-de="Überwachung des Netzwerks für den Nichtbanken-Devisenwechsel; Planung von Filialprüfungen und Analyse von Regelverstößen; Entwurf von Gesetzesänderungen. Einkaufsanalyse potenzieller Lieferanten." data-en="Monitoring of the non-banking foreign exchange network; Planning of branch inspections and analysis of regulatory violations; Drafting of legal amendments. Procurement analysis of potential suppliers.">
+                            Überwachung des Netzwerks für den Nichtbanken-Devisenwechsel; Planung von Filialprüfungen und Analyse von Regelverstößen; Entwurf von Gesetzesänderungen. Einkaufsanalyse potenzieller Lieferanten.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title" data-de="Bankmanager" data-en="Banking Manager">Bankmanager</div>
+                                <div class="company" data-de="Staatliche Sparkasse der Ukraine; Delta Bank; Forum Bank (Commerzbank Gruppe), Kyiw" data-en="State Savings Bank of Ukraine; Delta Bank; Forum Bank (Commerzbank Group), Kyiv">Staatliche Sparkasse der Ukraine; Delta Bank; Forum Bank (Commerzbank Gruppe), Kyiw</div>
+                            </div>
+                            <div class="job-date">2009 – 2016</div>
+                        </div>
+                        <div class="job-description" data-de="Überwachung von Vermögenswerten und Einrichtung eines Managementsystems; Entwicklung technischer Anforderungen; Steuerung von Filialen im regionalen Netzwerk; Abschreibung von Vermögenswerten." data-en="Asset monitoring and establishment of management systems; Development of technical requirements; Management of branches in regional network; Asset write-offs.">
+                            Überwachung von Vermögenswerten und Einrichtung eines Managementsystems; Entwicklung technischer Anforderungen; Steuerung von Filialen im regionalen Netzwerk; Abschreibung von Vermögenswerten.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="education-section">
+                    <h2 class="profile-title" data-de="Bildung" data-en="Education">Bildung</h2>
+                    
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div>
+                                <div class="degree-title" data-de="Master Diplom - Bankwesen" data-en="Master's Degree - Banking">Master Diplom - Bankwesen</div>
+                                <div class="institution" data-de="National Akademie der Verwaltung, Kiew" data-en="National Academy of Public Administration, Kyiv">National Akademie der Verwaltung, Kiew</div>
+                            </div>
+                            <div class="education-date">2005</div>
+                        </div>
+                        <div class="degree-description" data-de="Bewertung des Diploms liegt vor" data-en="Diploma evaluation available">
+                            Bewertung des Diploms liegt vor
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div>
+                                <div class="degree-title" data-de="Fachdiplom - Rechtschutzende Tätigkeit" data-en="Specialist Degree - Law Enforcement Activities">Fachdiplom - Rechtschutzende Tätigkeit</div>
+                                <div class="institution" data-de="Nationale Universität für innere Angelegenheiten Kharkiw" data-en="National University of Internal Affairs, Kharkiv">Nationale Universität für innere Angelegenheiten Kharkiw</div>
+                            </div>
+                            <div class="education-date">2003</div>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div>
+                                <div class="degree-title" data-de="Abitur" data-en="High School Diploma">Abitur</div>
+                                <div class="institution" data-de="Gesamtschule 14 der Stadt Kertsch" data-en="Comprehensive School 14, Kerch">Gesamtschule 14 der Stadt Kertsch</div>
+                            </div>
+                            <div class="education-date">1999</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'de';
+
+        function switchLanguage(lang) {
+            if (currentLanguage === lang) return;
+            
+            currentLanguage = lang;
+            
+            // Update active button
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+            
+            // Update document language
+            document.documentElement.lang = lang;
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-de][data-en]').forEach(element => {
+                const text = element.getAttribute(`data-${lang}`);
+                if (text) {
+                    element.classList.remove('fade-in');
+                    
+                    setTimeout(() => {
+                        element.textContent = text;
+                        element.classList.add('fade-in');
+                        
+                        // Remove fade-in class after animation
+                        setTimeout(() => {
+                            element.classList.remove('fade-in');
+                        }, 500);
+                    }, 50);
+                }
+            });
+        }
+
+        // Initialize language switcher
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            switchLanguage('de');
+            
+            // Add smooth scrolling for better user experience
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+
+        // Add keyboard navigation for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'l') {
+                e.preventDefault();
+                const nextLang = currentLanguage === 'de' ? 'en' : 'de';
+                switchLanguage(nextLang);
+            }
+        });
+
+        // Add print styles optimization
+        window.addEventListener('beforeprint', function() {
+            document.querySelector('.language-switcher').style.display = 'none';
+        });
+
+        window.addEventListener('afterprint', function() {
+            document.querySelector('.language-switcher').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
